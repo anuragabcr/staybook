@@ -1,5 +1,13 @@
-import { collection, addDoc, getDocs, getDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import {
+  collection,
+  addDoc,
+  getDocs,
+  getDoc,
+  doc,
+  updateDoc,
+  deleteDoc,
+} from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import { firestore, filestore } from "@/firebase";
 import { HotelInfoDetails } from "./HotelDetails";
@@ -19,18 +27,16 @@ export const addDataToFirestore = async (data: HotelInfoDetails) => {
 
 // Get all documents from a collection
 export const getDocumentsFromFirestore = async (): Promise<
-{ id: string; data: HotelInfoDetails }[]
+  { id: string; data: HotelInfoDetails }[]
 > => {
   try {
     const snapshot = await getDocs(collection(firestore, COLLECTIONNAME));
     console.log(snapshot);
-    
-    const documents = snapshot.docs.map(
-      (doc) => ({
-        id: doc.id,
-        data: doc.data() as HotelInfoDetails,
-      })
-    );
+
+    const documents = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      data: doc.data() as HotelInfoDetails,
+    }));
     return documents;
   } catch (error) {
     console.error("Error getting documents from Firestore:", error);
@@ -38,29 +44,32 @@ export const getDocumentsFromFirestore = async (): Promise<
   }
 };
 
-export const uploadImage = async(file: File) => {
+export const uploadImage = async (file: File) => {
   var downloadURL: string = "";
   try {
-    const imageRef = ref(filestore, `hotels/${file.name + Math.random().toString(36).substring(2, 15)}`);
-      await uploadBytes(imageRef, file);
-      downloadURL = await getDownloadURL(imageRef);
+    const imageRef = ref(
+      filestore,
+      `hotels/${file.name + Math.random().toString(36).substring(2, 15)}`
+    );
+    await uploadBytes(imageRef, file);
+    downloadURL = await getDownloadURL(imageRef);
   } catch (error) {
     console.log(error);
   }
-  return downloadURL
-}
+  return downloadURL;
+};
 
 // get a document
 export const getDocumentById = async (
   documentId: string
-):Promise <HotelInfoDetails | null> => {
+): Promise<HotelInfoDetails | null> => {
   try {
     const docRef = doc(firestore, COLLECTIONNAME, documentId);
     const docSnap = await getDoc(docRef);
-    return docSnap.data() as HotelInfoDetails
+    return docSnap.data() as HotelInfoDetails;
   } catch (error) {
     console.error("Error finding document in Firestore:", error);
-    return null
+    return null;
   }
 };
 
@@ -70,10 +79,24 @@ export const updateDocumentInFirestore = async (
   data: Partial<HotelInfoDetails>
 ) => {
   try {
-    const documentRef = doc(firestore, COLLECTIONNAME, documentId)
-    await updateDoc(documentRef, data)
+    const documentRef = doc(firestore, COLLECTIONNAME, documentId);
+    await updateDoc(documentRef, data);
   } catch (error) {
     console.error("Error updating document in Firestore:", error);
+  }
+};
+
+// Update a specific field of a document
+export const updateDocumentField = async (
+  documentId: string,
+  fieldName: string,
+  newValue: string | number
+) => {
+  try {
+    const documentRef = doc(firestore, COLLECTIONNAME, documentId);
+    await updateDoc(documentRef, { [fieldName]: newValue });
+  } catch (error) {
+    console.error("Error updating document:", error);
   }
 };
 
@@ -81,7 +104,7 @@ export const updateDocumentInFirestore = async (
 export const deleteDocumentFromFirestore = async (documentId: string) => {
   try {
     const documentRef = doc(firestore, COLLECTIONNAME, documentId);
-    await deleteDoc(documentRef)
+    await deleteDoc(documentRef);
   } catch (error) {
     console.error("Error deleting document from Firestore:", error);
   }
