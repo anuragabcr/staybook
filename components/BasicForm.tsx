@@ -17,11 +17,11 @@ const BasicForm = ({ formData, handleChange, errors }: BasicFormProps) => {
           <div className="w-80">
             <div className="flex items-center">
               <h1 className="text-xl font-medium pr-2 leading-5 text-gray-800">
-                Required Fields
+                Basic Info
               </h1>
             </div>
             <p className="mt-4 text-sm leading-5 text-gray-600">
-              You must fill these fields for saving it.
+              Enter Basic details about your hotel.
             </p>
           </div>
           <div>
@@ -97,22 +97,22 @@ const BasicForm = ({ formData, handleChange, errors }: BasicFormProps) => {
               <div className="md:w-64 md:ml-12 md:mt-0 mt-4">
                 <label
                   className="text-sm leading-none text-gray-800"
-                  htmlFor="hotelStartingPrice"
+                  htmlFor="hotelLandmark"
                 >
-                  Hotel Starting Price
+                  Hotel Landmark
                 </label>
                 <input
-                  type="number"
-                  name="hotelStartingPrice"
-                  value={formData.hotelStartingPrice}
+                  type="text"
+                  name="hotelLandmark"
+                  value={formData.hotelLandmark}
                   onChange={handleChange}
                   className="w-full p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800"
-                  id="hotelStartingPrice"
-                  placeholder="hotelStartingPrice"
+                  id="hotelLandmark"
+                  placeholder="hotelLandmark"
                 />
-                {errors.hotelStartingPrice && (
+                {errors.hotelLandmark && (
                   <p className="text-red-500 text-sm mt-1">
-                    {errors.hotelStartingPrice}
+                    {errors.hotelLandmark}
                   </p>
                 )}
               </div>
@@ -123,11 +123,11 @@ const BasicForm = ({ formData, handleChange, errors }: BasicFormProps) => {
           <div className="w-80">
             <div className="flex items-center">
               <h1 className="text-xl font-medium pr-2 leading-5 text-gray-800">
-                Optional Fields
+                
               </h1>
             </div>
             <p className="mt-4 text-sm leading-5 text-gray-600">
-              You can skip these fields and edit it later.
+              
             </p>
           </div>
           <div>
@@ -203,22 +203,22 @@ const BasicForm = ({ formData, handleChange, errors }: BasicFormProps) => {
               <div className="md:w-64 md:ml-12 md:mt-0 mt-4">
                 <label
                   className="text-sm leading-none text-gray-800"
-                  htmlFor="hotelLandmark"
+                  htmlFor="hotelStartingPrice"
                 >
-                  Hotel Landmark
+                  Hotel Starting Price
                 </label>
                 <input
                   type="name"
-                  name="hotelLandmark"
-                  value={formData.hotelLandmark}
+                  name="hotelStartingPrice"
+                  value={formData.hotelStartingPrice}
                   onChange={handleChange}
                   className="w-full p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800"
-                  id="hotelLandmark"
-                  placeholder="hotelLandmark"
+                  id="hotelStartingPrice"
+                  placeholder="hotelStartingPrice"
                 />
-                {errors.hotelLandmark && (
+                {errors.hotelStartingPrice && (
                   <p className="text-red-500 text-sm mt-1">
-                    {errors.hotelLandmark}
+                    {errors.hotelStartingPrice}
                   </p>
                 )}
               </div>

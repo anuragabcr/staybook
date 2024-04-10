@@ -17,7 +17,7 @@ const BasicForm = ({ formData, handleChange, errors }: BasicFormProps) => {
           <div className="w-80">
             <div className="flex items-center">
               <h1 className="text-xl font-medium pr-2 leading-5 text-gray-800">
-                Slug Fields
+                Address Fields
               </h1>
             </div>
             <p className="mt-4 text-sm leading-5 text-gray-600">
@@ -113,6 +113,28 @@ const BasicForm = ({ formData, handleChange, errors }: BasicFormProps) => {
                 {errors.hotelState && (
                   <p className="text-red-500 text-sm mt-1">
                     {errors.hotelState}
+                  </p>
+                )}
+              </div>
+              <div className="md:w-64 md:ml-12 md:mt-0 mt-4">
+                <label
+                  className="text-sm leading-none text-gray-800"
+                  htmlFor="hotelPincode"
+                >
+                  Hotel Pincode
+                </label>
+                <input
+                  type="text"
+                  name="hotelPincode"
+                  value={formData.hotelPincode}
+                  onChange={handleChange}
+                  className="w-full p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800"
+                  id="hotelPincode"
+                  placeholder="hotelPincode"
+                />
+                {errors.hotelPincode && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.hotelPincode}
                   </p>
                 )}
               </div>

@@ -21,7 +21,7 @@ export default function Home() {
 
   return (
     <div>
-      {data ? <DisplayHotels hotels={data} /> : <Loading />}
+      {data ? <DisplayHotels data={data} /> : <Loading />}
     </div>
   );
 }

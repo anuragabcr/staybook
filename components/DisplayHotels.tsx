@@ -3,9 +3,16 @@ import { deleteDocumentFromFirestore } from "@/lib/firestore";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const DisplayHotels = ({hotels}: {hotels: { id: string; data: HotelInfoDetails }[]}) => {
+const DisplayHotels = ({data}: {data: { id: string; data: HotelInfoDetails }[]}) => {
     const [show, setShow] = useState<null | number>(null)
+    const [hotels, setHotels] = useState(data)
     const router = useRouter()
+
+    const handleDelete = (hotelID: string) => {
+        deleteDocumentFromFirestore(hotelID)
+        const filteredData = hotels.filter((hotel) => hotel.id !== hotelID)
+        setHotels(filteredData)
+    }
 
     return (
         <>
@@ -41,9 +48,7 @@ const DisplayHotels = ({hotels}: {hotels: { id: string; data: HotelInfoDetails }
                                 </td>
                                 <td className="pl-12">
                                     <p className="text-sm font-medium leading-none text-gray-800">{hotel.data.hotelEmailId}</p>
-                                    <div className="w-24 h-3 bg-gray-100 rounded-full mt-2">
-                                        <div className="w-20 h-3 bg-green-progress rounded-full" />
-                                    </div>
+                                    
                                 </td>
                                 <td className="pl-12">
                                     <p className="font-medium">{hotel.data.hotelContactNumber}</p>
@@ -77,7 +82,7 @@ const DisplayHotels = ({hotels}: {hotels: { id: string; data: HotelInfoDetails }
                                         <div onClick={() => { router.push(`/${hotel.id}`)}} className="text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white" >
                                             <p>Edit</p>
                                         </div>
-                                        <div onClick={() => {deleteDocumentFromFirestore(hotel.id); router.push(`/`) }} className="text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
+                                        <div onClick={() => {handleDelete(hotel.id);  }} className="text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
                                             <p>Delete</p>
                                         </div>
                                     </div>}

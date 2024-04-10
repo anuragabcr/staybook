@@ -63,7 +63,7 @@ const FormSteps = ({ active, setActive }: InputFormProps) => {
                 active == "step2" ? "text-white" : "text-gray-700"
               }`}
             >
-              Slug details
+              Address details
             </p>
             <p
               className={`w-full text-xs mt-1 leading-none ${

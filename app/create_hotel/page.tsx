@@ -22,6 +22,13 @@ const CreateForm = () => {
 
   const schema = yup.object().shape({
     hotelName: yup.string().required("Hotel name is required"),
+    hotelLandmark: yup.string().required("Landmark is required"),
+    hotelAddress: yup.string().required("Address is required"),
+    hotelDescription: yup.string().required("Description is required"),
+    hotelState: yup.string().required("State is required"),
+    hotelCity: yup.string().required("City is required"),
+    hotelRegion: yup.string().required("Region is required"),
+    hotelPincode: yup.string().required("Pincode is required"),
     hotelEmailId: yup
       .string()
       .email("Invalid email format")
@@ -52,11 +59,11 @@ const CreateForm = () => {
     try {
       await schema.validate(formData, { abortEarly: false });
       
-      formData.hotelSlugsDetails.hotel = formData.hotelName
-      formData.hotelSlugsDetails.hotelCity = formData.hotelCity
-      formData.hotelSlugsDetails.hotelCountry = formData.hotelCountry
-      formData.hotelSlugsDetails.hotelRegion = formData.hotelRegion
-      formData.hotelSlugsDetails.hotelState = formData.hotelState
+      formData.hotelSlugsDetails.hotel = "staybook-hotel-" + formData.hotelName.toLowerCase() + "-" + formData.hotelCity.toLowerCase()
+      formData.hotelSlugsDetails.hotelCity = "hotels-in-" + formData.hotelCity
+      formData.hotelSlugsDetails.hotelCountry = "hotels-in-" + formData.hotelCountry
+      formData.hotelSlugsDetails.hotelRegion = "hotels-in-" + formData.hotelRegion
+      formData.hotelSlugsDetails.hotelState = "hotels-in-" + formData.hotelState
       
       if (selectedFiles != null) {
         for (let i = 0; i < selectedFiles.length; i++) {
