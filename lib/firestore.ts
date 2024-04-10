@@ -1,4 +1,4 @@
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc, getDocs, getDoc, doc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 import { firestore, filestore } from "@/firebase";
@@ -19,12 +19,17 @@ export const addDataToFirestore = async (data: HotelInfoDetails) => {
 
 // Get all documents from a collection
 export const getDocumentsFromFirestore = async (): Promise<
-  HotelInfoDetails[]
+{ id: string; data: HotelInfoDetails }[]
 > => {
   try {
     const snapshot = await getDocs(collection(firestore, COLLECTIONNAME));
+    console.log(snapshot);
+    
     const documents = snapshot.docs.map(
-      (doc) => doc.data() as HotelInfoDetails
+      (doc) => ({
+        id: doc.id,
+        data: doc.data() as HotelInfoDetails,
+      })
     );
     return documents;
   } catch (error) {
@@ -45,18 +50,32 @@ export const uploadImage = async(file: File) => {
   return downloadURL
 }
 
+// get a document
+export const getDocumentById = async (
+  documentId: string
+):Promise <HotelInfoDetails | null> => {
+  try {
+    const docRef = doc(firestore, COLLECTIONNAME, documentId);
+    const docSnap = await getDoc(docRef);
+    return docSnap.data() as HotelInfoDetails
+  } catch (error) {
+    console.error("Error finding document in Firestore:", error);
+    return null
+  }
+};
+
 // Update a document
-// export const updateDocumentInFirestore = async (
-//   documentId: string,
-//   data: Partial<HotelInfoDetails>
-// ) => {
-//   try {
-//     const documentRef = firestore.collection(COLLECTIONNAME).doc(documentId);
-//     await documentRef.update(data);
-//   } catch (error) {
-//     console.error("Error updating document in Firestore:", error);
-//   }
-// };
+export const updateDocumentInFirestore = async (
+  documentId: string,
+  data: Partial<HotelInfoDetails>
+) => {
+  try {
+    const documentRef = doc(firestore, COLLECTIONNAME, documentId)
+    await updateDoc(documentRef, data)
+  } catch (error) {
+    console.error("Error updating document in Firestore:", error);
+  }
+};
 
 // Delete a document
 // export const deleteDocumentFromFirestore = async (documentId: string) => {

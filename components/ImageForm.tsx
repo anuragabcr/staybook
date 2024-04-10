@@ -1,11 +1,13 @@
+import { ImagesList } from '@/lib/HotelDetails';
 import React, { useState } from 'react';
 
 interface ImageUploadProps {
     selectedFiles: FileList | null ; 
     setSelectedFiles: (selectedFiles: FileList) => void;
+    imagesList?: ImagesList[]
 }
 
-const ImageUpload: React.FC<ImageUploadProps> = ({ selectedFiles, setSelectedFiles }) => {
+const ImageUpload: React.FC<ImageUploadProps> = ({ selectedFiles, setSelectedFiles, imagesList }) => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setSelectedFiles(e.target.files);
@@ -53,6 +55,19 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ selectedFiles, setSelectedFil
           ))}
         </div>
       )}
+      {imagesList && (
+        <div className="mt-4 flex flex-wrap">
+        {imagesList.map((file, index) => (
+          <div key={index} className="w-1/4 p-2">
+            <img
+              src={file.imageUrl}
+              alt={`Preview ${index}`}
+              className="w-full h-auto object-cover rounded"
+            />
+          </div>
+        ))}
+      </div>
+      ) }
     </div>
   );
 };
