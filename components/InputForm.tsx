@@ -29,13 +29,9 @@ const InputForm = () => {
 
     try {
       await schema.validate(formData, { abortEarly: false });
-      // Form data is valid, perform form submission logic, e.g., save to Firestore
-      console.log("Form submitted with data:", formData);
-      // Reset form data after submission
       setFormData(initialFormData);
       setErrors({});
     } catch (validationErrors: any) {
-      // Form data is invalid, set errors state to display error messages
       const errors = validationErrors.inner.reduce((acc: any, error: any) => {
         acc[error.path] = error.message;
         return acc;

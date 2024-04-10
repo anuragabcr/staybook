@@ -19,7 +19,6 @@ const COLLECTIONNAME = "hotels";
 export const addDataToFirestore = async (data: HotelInfoDetails) => {
   try {
     const docRef = await addDoc(collection(firestore, COLLECTIONNAME), data);
-    console.log(docRef);
   } catch (error) {
     console.error("Error adding data to Firestore:", error);
   }
