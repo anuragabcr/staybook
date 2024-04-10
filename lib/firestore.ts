@@ -1,4 +1,4 @@
-import { collection, addDoc, getDocs, getDoc, doc, updateDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, getDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 import { firestore, filestore } from "@/firebase";
@@ -78,11 +78,11 @@ export const updateDocumentInFirestore = async (
 };
 
 // Delete a document
-// export const deleteDocumentFromFirestore = async (documentId: string) => {
-//   try {
-//     const documentRef = firestore.collection(COLLECTIONNAME).doc(documentId);
-//     await documentRef.delete();
-//   } catch (error) {
-//     console.error("Error deleting document from Firestore:", error);
-//   }
-// };
+export const deleteDocumentFromFirestore = async (documentId: string) => {
+  try {
+    const documentRef = doc(firestore, COLLECTIONNAME, documentId);
+    await deleteDoc(documentRef)
+  } catch (error) {
+    console.error("Error deleting document from Firestore:", error);
+  }
+};

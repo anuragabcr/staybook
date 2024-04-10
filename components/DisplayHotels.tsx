@@ -1,4 +1,5 @@
 import { HotelInfoDetails } from "@/lib/HotelDetails";
+import { deleteDocumentFromFirestore } from "@/lib/firestore";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -70,10 +71,13 @@ const DisplayHotels = ({hotels}: {hotels: { id: string; data: HotelInfoDetails }
                                     </button>
                                     }
                                    {show==index &&  <div className="dropdown-content bg-white shadow w-24 absolute z-30 right-0 mr-6 ">
+                                   <div onClick={() => { router.push(`/details/${hotel.id}`)}} className="text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white" >
+                                            <p>View</p>
+                                        </div>
                                         <div onClick={() => { router.push(`/${hotel.id}`)}} className="text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white" >
                                             <p>Edit</p>
                                         </div>
-                                        <div className="text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
+                                        <div onClick={() => {deleteDocumentFromFirestore(hotel.id); router.push(`/`) }} className="text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
                                             <p>Delete</p>
                                         </div>
                                     </div>}
