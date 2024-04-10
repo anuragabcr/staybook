@@ -7,6 +7,8 @@ import { addDataToFirestore } from "@/lib/firestore";
 import { ErrorObject } from "@/lib/type";
 import FormSteps from "@/components/FormSteps";
 import BasicForm from "@/components/BasicForm";
+import SlugForm from "@/components/SlugForm"
+import { log } from "console";
 
 const CreateForm = () => {
   const initialFormData: HotelInfoDetails = new HotelInfoDetails();
@@ -63,11 +65,18 @@ const CreateForm = () => {
       <div className="xl:w-10/12 w-full px-8">
         <FormSteps active={active} setActive={setActive} />
         <hr />
-        <BasicForm
+        
+        {active === "step1"? <BasicForm
           formData={formData}
           handleChange={handleChange}
           errors={errors}
-        />
+        /> : null}
+        {active === "step2"? <SlugForm
+          formData={formData}
+          handleChange={handleChange}
+          errors={errors}
+        /> : null}
+
         <div className="flex justify-center">
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
