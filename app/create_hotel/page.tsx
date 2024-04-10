@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import * as yup from "yup";
+import { useRouter } from "next/navigation";
 
-import { ImagesList, HotelInfoDetails } from "@/lib/HotelDetails";
+import { HotelInfoDetails } from "@/lib/HotelDetails";
 import { addDataToFirestore, uploadImage } from "@/lib/firestore";
 import { ErrorObject } from "@/lib/type";
 import FormSteps from "@/components/FormSteps";
@@ -11,6 +12,8 @@ import SlugForm from "@/components/SlugForm";
 import ImageForm from "@/components/ImageForm"
 
 const CreateForm = () => {
+  const router = useRouter();
+
   const initialFormData: HotelInfoDetails = new HotelInfoDetails();
   const [formData, setFormData] = useState<HotelInfoDetails>(initialFormData);
   const [errors, setErrors] = useState<ErrorObject>({});
@@ -72,7 +75,11 @@ const CreateForm = () => {
       addDataToFirestore(formData);
       setFormData(initialFormData);
       setErrors({});
+      setSelectedFiles(null)
+      router.push("/")
     } catch (validationErrors: any) {
+      console.log(validationErrors);
+      
       const errors = validationErrors.inner.reduce((acc: any, error: any) => {
         acc[error.path] = error.message;
         return acc;
