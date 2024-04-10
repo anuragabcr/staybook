@@ -1,6 +1,7 @@
 import { collection, addDoc, getDocs } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
-import { firestore } from "@/firebase";
+import { firestore, filestore } from "@/firebase";
 import { HotelInfoDetails } from "./HotelDetails";
 
 // CONST variables
@@ -31,6 +32,18 @@ export const getDocumentsFromFirestore = async (): Promise<
     return [];
   }
 };
+
+export const uploadImage = async(file: File) => {
+  var downloadURL: string = "";
+  try {
+    const imageRef = ref(filestore, `hotels/${file.name + Math.random().toString(36).substring(2, 15)}`);
+      await uploadBytes(imageRef, file);
+      downloadURL = await getDownloadURL(imageRef);
+  } catch (error) {
+    console.log(error);
+  }
+  return downloadURL
+}
 
 // Update a document
 // export const updateDocumentInFirestore = async (

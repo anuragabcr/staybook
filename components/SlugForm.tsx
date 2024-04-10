@@ -29,22 +29,22 @@ const BasicForm = ({ formData, handleChange, errors }: BasicFormProps) => {
               <div className="md:w-64">
                 <label
                   className="text-sm leading-none text-gray-800"
-                  htmlFor="hotel"
+                  htmlFor="hotelCountry"
                 >
-                  Hotel 
+                  Hotel Country 
                 </label>
                 <input
                   type="text"
-                  id="hotel"
-                  name="hotel"
-                  value={formData.hotelSlugsDetails.hotel}
+                  id="hotelCountry"
+                  name="hotelCountry"
+                  value={formData.hotelCountry}
                   onChange={handleChange}
-                  placeholder="Enter hotel name"
+                  placeholder="Enter hotelCountry name"
                   className="w-full p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800"
                 />
-                {errors.hotel && (
+                {errors.hotelCountry && (
                   <p className="text-red-500 text-sm mt-1">
-                    {errors.hotel}
+                    {errors.hotelCountry}
                   </p>
                 )}
               </div>
@@ -59,7 +59,7 @@ const BasicForm = ({ formData, handleChange, errors }: BasicFormProps) => {
                   type="text"
                   name="hotelCity"
                   id="hotelCity"
-                  value={formData.hotelSlugsDetails.hotelCity}
+                  value={formData.hotelCity}
                   onChange={handleChange}
                   placeholder="hotelCity"
                   className="w-full p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800"
@@ -80,9 +80,9 @@ const BasicForm = ({ formData, handleChange, errors }: BasicFormProps) => {
                   Hotel Region
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   name="hotelRegion"
-                  value={formData.hotelSlugsDetails.hotelRegion}
+                  value={formData.hotelRegion}
                   onChange={handleChange}
                   id="hotelRegion"
                   className="w-full p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800"
@@ -102,9 +102,9 @@ const BasicForm = ({ formData, handleChange, errors }: BasicFormProps) => {
                   Hotel State
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   name="hotelState"
-                  value={formData.hotelSlugsDetails.hotelState}
+                  value={formData.hotelState}
                   onChange={handleChange}
                   className="w-full p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800"
                   id="hotelState"
@@ -113,30 +113,6 @@ const BasicForm = ({ formData, handleChange, errors }: BasicFormProps) => {
                 {errors.hotelState && (
                   <p className="text-red-500 text-sm mt-1">
                     {errors.hotelState}
-                  </p>
-                )}
-              </div>
-            </div>
-            <div className="md:flex items-center lg:ml-24 lg:mt-0 mt-4">
-              <div className="md:w-64">
-                <label
-                  className="text-sm leading-none text-gray-800"
-                  htmlFor="hotelCountry"
-                >
-                  Hotel Country
-                </label>
-                <input
-                  type="name"
-                  name="hotelCountry"
-                  value={formData.hotelSlugsDetails.hotelCountry}
-                  onChange={handleChange}
-                  id="hotelCountry"
-                  className="w-full p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800"
-                  placeholder="hotelCountry"
-                />
-                {errors.hotelCountry && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.hotelCountry}
                   </p>
                 )}
               </div>

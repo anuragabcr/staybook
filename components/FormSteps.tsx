@@ -9,7 +9,7 @@ interface InputFormProps {
 const FormSteps = ({ active, setActive }: InputFormProps) => {
   return (
     <>
-      <div className="bg-gray-100 py-12 flex flex-wrap items-center justify-center">
+      <div className="bg-gray-100 py-12 flex flex-wrap items-center justify-center m-5">
         <div
           className="w-52 h-16 relative md:mt-0 mt-4 cursor-pointer"
           onClick={() => setActive("step1")}
